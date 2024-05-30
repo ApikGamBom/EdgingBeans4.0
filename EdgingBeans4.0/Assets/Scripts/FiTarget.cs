@@ -7,6 +7,7 @@ public class FiTarget : MonoBehaviour
 
     public float drop = 2f;
 
+
     public void Commence (float amount)
     {
         drop -= amount;

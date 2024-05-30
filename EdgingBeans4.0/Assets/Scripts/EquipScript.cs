@@ -12,10 +12,14 @@ public class EquipScript : MonoBehaviour
     public GameObject rayObject;
     public GameObject child;
     public Transform rigthHandPivot;
+    public GameObject OilStorage;
+    public GameObject Filloil;
+    public bool fillloilbool = false;
+    public GameObject radius;
 
     [Header("Floats and Bools")]
     public float range = 2f;
-    //public float open = 100f; //Ikke nødvendig
+    //public float open = 100f; //Ikke nï¿½dvendig
     public bool isHoldingItem;
     public static int timesPickedUpInteractable = 0;
 
@@ -53,7 +57,7 @@ public class EquipScript : MonoBehaviour
         }
     }
 
-    void ShootRay(){
+    void ShootRay() {
         RaycastHit hit;
 
         if (Physics.Raycast(raySpawnPoint.transform.position, raySpawnPoint.transform.forward, out hit, range))
@@ -76,6 +80,21 @@ public class EquipScript : MonoBehaviour
             else
             {
                 pickUpText.SetActive(false);
+            }
+        }
+        if (Physics.Raycast(raySpawnPoint.transform.position, raySpawnPoint.transform.forward, out hit, 3))
+        {
+            objName = hit.transform.name;
+
+            if (objName == OilStorage.transform.name && InsideRadius.inRadius)
+            {
+                GiveOil();
+                Filloil.SetActive(true);
+                Debug.Log("Skibidi");
+            }
+            else
+            {
+                Filloil.SetActive(false);
             }
         }
     }
@@ -108,5 +127,18 @@ public class EquipScript : MonoBehaviour
         rayObject.transform.position = rigthHandPivot.transform.position;
         rayObject.transform.rotation = rigthHandPivot.transform.rotation;
         rayObject.transform.SetParent(rigthHandPivot);
+    }
+
+    void GiveOil()
+    {
+
+        if(Input.GetKeyDown(KeyCode.E))
+        {
+            if (PlayerStats.oilCount > 0)
+            {
+                PlayerStats.tankCount += PlayerStats.oilCount;
+                PlayerStats.oilCount = 0;
+            }
+        }
     }
 }

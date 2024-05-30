@@ -1,9 +1,10 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Text;
 using UnityEngine;
 
 public class Interactable : MonoBehaviour
 {
-    public void Interact()
-    {
-        Debug.Log("Interacted with " + gameObject.name);
-    }
+
 }
