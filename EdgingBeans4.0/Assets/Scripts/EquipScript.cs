@@ -40,16 +40,16 @@ public class EquipScript : MonoBehaviour
         {
             ShootRay();
 
-            if (Input.GetKeyDown("q"))
-            {
-                if (rigthHandPivot.transform.childCount > 0)
-                {
-                    UnequipObject();
-                } else
-                {
-                    Debug.Log("No child found on gameobject called: " + rigthHandPivot.transform.name);
-                }
-            }
+            //if (Input.GetKeyDown("q"))
+            //{
+            //    if (rigthHandPivot.transform.childCount > 0)
+            //    {
+            //        UnequipObject();
+            //    } else
+            //    {
+            //        Debug.Log("No child found on gameobject called: " + rigthHandPivot.transform.name);
+            //    }
+            //}
         }
         if (PauseMenu.isPaused)
         {
@@ -86,7 +86,7 @@ public class EquipScript : MonoBehaviour
         {
             objName = hit.transform.name;
 
-            if (objName == OilStorage.transform.name && InsideRadius.inRadius)
+            if (objName == OilStorage.transform.name && InsideRadius.inRadius && PlayerStats.oilCount > 0)
             {
                 GiveOil();
                 Filloil.SetActive(true);

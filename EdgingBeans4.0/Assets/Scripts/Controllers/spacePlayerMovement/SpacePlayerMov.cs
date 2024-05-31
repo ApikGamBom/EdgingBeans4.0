@@ -53,7 +53,7 @@ public class SpacePlayerMov : MonoBehaviour
     public LayerMask obstacleMask;
     public LayerMask interactableMask;
     public LayerMask enemyMask;
-    bool isGrounded;
+    public bool isGrounded;
 
     #endregion
     Vector3 scale;
