@@ -17,6 +17,8 @@ public class PlayerStats : MonoBehaviour
     //Health
     public TMP_Text healthScore;
     public static float health;
+
+    public float maxHealth;
     public float publicHealth;
     public bool isDead;
     public static bool isDeadStatic;
@@ -31,6 +33,8 @@ public class PlayerStats : MonoBehaviour
         health = publicHealth;
 
         deathScreen.SetActive(false);
+
+        maxHealth = health;
     }
 
     void Update()
@@ -38,7 +42,7 @@ public class PlayerStats : MonoBehaviour
         isDeadStatic = isDead;
         publicHealth = health;
 
-        healthScore.text = health.ToString() + "/100";
+        healthScore.text = health.ToString() + "/" + maxHealth.ToString();
         oilCountText.text = ": " + oilCount.ToString();
 
         if (health <= 0)

@@ -20,6 +20,6 @@ public class Target : MonoBehaviour
     void Die()
     {
         Destroy(gameObject);
-        PlayerStats.oilCount += 1;
+        PlayerStats.oilCount += Gun.PointsPerKill;
     }
 }

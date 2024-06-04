@@ -67,7 +67,7 @@ public class SpacePlayerMov : MonoBehaviour
 
     void Update()
     {
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask | obstacleMask | enemyMask);
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask | obstacleMask | interactableMask | enemyMask);
 
         if (isGrounded && velocity.y < 0)
         {
