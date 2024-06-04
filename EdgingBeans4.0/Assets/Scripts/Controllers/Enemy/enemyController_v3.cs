@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using JetBrains.Annotations;
+using UnityEngine.SceneManagement;
+using TMPro;
+using UnityEngine.UI;
 
 public class enemyController_v3 : MonoBehaviour
 {
@@ -21,27 +25,30 @@ public class enemyController_v3 : MonoBehaviour
     public GameObject rayPivot;
     public bool seesPlayer;
 
-    public float damage;
-    public float attackTime;
+    public float damage = 5f;
+    public float attackInterval = 1f;
+    private bool isAttacking = false;
 
-    void Start ()
+    void Start()
     {
         player = playerManager.instance.player.transform;
         agent = GetComponent<NavMeshAgent>();
     }
 
-    void Update ()
+    void Update()
     {
         if (!PauseMenu.isPaused)
         {
-            if (seesPlayer == false) {
+            if (seesPlayer == false)
+            {
                 agent.SetDestination(goal.transform.position);
             }
             RayPivotPointToPlayer();
 
             float lastPlayerDistance = Vector3.Distance(lastPlayerPos.transform.position, agent.transform.position);
             float distance = Vector3.Distance(player.position, agent.transform.position);
-            if (lastPlayerDistance <= minDistanceToLastPlayer && distance >= 6) {
+            if (lastPlayerDistance <= minDistanceToLastPlayer && distance >= 6)
+            {
                 seesPlayer = false;
             }
 
@@ -52,20 +59,33 @@ public class enemyController_v3 : MonoBehaviour
                 {
                     Debug.Log(hit.transform.gameObject + " SawPlayer! " + playerObject);
                     SawPlayer();
-                } else if (hit.transform.gameObject != playerObject && !seesPlayer && distance > maxDistance) {
+                }
+                else if (hit.transform.gameObject != playerObject && !seesPlayer && distance > maxDistance)
+                {
                     Debug.Log(hit.transform.gameObject + " Tried " + playerObject);
                     GoForGoal();
-                } else if (distance <= 4)
+                }
+                else if (distance <= 4)
                 {
                     GoForPlayer();
                 }
             }
-        
+
             if (distance <= agent.stoppingDistance)
             {
-                AttackPlayer();
-
+                if (!isAttacking)
+                {
+                    StartCoroutine(AttackPlayer());
+                }
                 FacePlayer();
+            }
+            else
+            {
+                if (isAttacking)
+                {
+                    StopCoroutine(AttackPlayer());
+                    isAttacking = false;
+                }
             }
         }
     }
@@ -82,30 +102,39 @@ public class enemyController_v3 : MonoBehaviour
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
         agent.transform.rotation = Quaternion.Slerp(agent.transform.rotation, lookRotation, Time.deltaTime * 5f);
     }
+
     void RayPivotPointToPlayer()
     {
         Vector3 direction = (player.position - rayPivot.transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
         rayPivot.transform.rotation = Quaternion.Slerp(rayPivot.transform.rotation, lookRotation, Time.deltaTime * 5f);
     }
+
     void SawPlayer()
     {
         lastPlayerPos.transform.position = playerObject.transform.position;
         agent.SetDestination(lastPlayerPos.transform.position);
         seesPlayer = true;
     }
+
     void GoForGoal()
     {
         agent.SetDestination(goal.transform.position);
     }
+
     void GoForPlayer()
     {
         lastPlayerPos.transform.position = playerObject.transform.position;
         agent.SetDestination(player.transform.position);
     }
-    void AttackPlayer()
+
+    public IEnumerator AttackPlayer()
     {
-        PlayerStats.health -= damage/4000;
-        attackTime = Time.deltaTime;
+        isAttacking = true;
+        while (true)
+        {
+            PlayerStats.health -= damage;
+            yield return new WaitForSeconds(attackInterval);
+        }
     }
 }

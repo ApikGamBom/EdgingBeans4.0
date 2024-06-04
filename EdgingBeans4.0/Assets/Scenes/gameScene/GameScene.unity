@@ -7037,7 +7037,7 @@ MonoBehaviour:
   rayPivot: {fileID: 1378983179}
   seesPlayer: 0
   damage: 24
-  attackTime: 0
+  attackInterval: 1
 --- !u!1 &693997172
 GameObject:
   m_ObjectHideFlags: 0
