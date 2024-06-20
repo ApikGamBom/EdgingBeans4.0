@@ -213,4 +213,10 @@ public class SpacePlayerMov : MonoBehaviour
 
         //#endregion
     }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(groundCheck.transform.position, groundDistance);
+    }
 }

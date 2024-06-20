@@ -21,8 +21,8 @@ public class PlayerStats : MonoBehaviour
 
     public static int maxHealth;
     public int pHealth;
-    public bool isDead;
-    public static bool isDeadStatic;
+    public bool isAlive;
+    public static bool isAliveStatic;
 
     public GameObject deathScreen;
     public GameObject crossHair;
@@ -42,7 +42,7 @@ public class PlayerStats : MonoBehaviour
 
     void Update()
     {
-        isDeadStatic = isDead;
+        isAliveStatic = isAlive;
 
         pOilCount = oilCount;
         pHealth = health;
@@ -56,9 +56,9 @@ public class PlayerStats : MonoBehaviour
 
         if (health <= 0)
         {
-            isDead = true;
+            isAlive = true;
         }
-        if (isDead)
+        if (isAlive)
         {
             deathScreen.SetActive(true);
             crossHair.SetActive(false);
@@ -79,11 +79,11 @@ public class PlayerStats : MonoBehaviour
     public void Respawn()
     {
         deathScreen.SetActive(false);
-        UnityEngine.Cursor.lockState = CursorLockMode.Locked;
-        isDead = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        isAlive = false;
         health = maxHealth;
     }
-    public void Quit()
+    public void Exit()
     {
         deathScreen.SetActive(false);
         SceneManager.LoadScene("MainScene");

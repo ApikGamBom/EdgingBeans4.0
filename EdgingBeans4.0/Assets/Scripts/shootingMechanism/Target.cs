@@ -1,9 +1,12 @@
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class Target : MonoBehaviour
 {
     public float health = 50f;
+
+    [Header("Sounds")]
+    public AudioSource auidoSource;
+    public AudioClip death1;
 
     public void TakeDamage(float damageAmount)
     {
@@ -19,7 +22,10 @@ public class Target : MonoBehaviour
 
     void Die()
     {
+        auidoSource.clip = death1;
+        auidoSource.Play();
+
         Destroy(gameObject);
-        PlayerStats.oilCount += Gun.PointsPerKill;
+        PlayerStats.oilCount += Gun.oilPerKill;
     }
 }

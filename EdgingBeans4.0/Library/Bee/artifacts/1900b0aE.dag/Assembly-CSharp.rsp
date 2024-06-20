@@ -423,6 +423,7 @@
 "Assets/TextMesh Pro/Examples & Extras/Scripts/VertexZoom.cs"
 "Assets/TextMesh Pro/Examples & Extras/Scripts/WarpTextExample.cs"
 "Assets/tutorialTrigger.cs"
+"Assets/weaponSwitching.cs"
 -langversion:9.0
 
 /deterministic

@@ -1,12 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
-using JetBrains.Annotations;
-using UnityEngine.SceneManagement;
-using TMPro;
-using UnityEngine.UI;
 
 public class enemyController_v3 : MonoBehaviour
 {
@@ -28,6 +22,9 @@ public class enemyController_v3 : MonoBehaviour
     public int damage = 1;
     public float attackInterval = 1f;
     private bool isAttacking = false;
+    public bool gotShot;
+
+    //=====Sounds for enemy death is in "Target.cs"=====\\
 
     void Start()
     {
@@ -65,13 +62,13 @@ public class enemyController_v3 : MonoBehaviour
                     Debug.Log(hit.transform.gameObject + " Tried " + playerObject);
                     GoForGoal();
                 }
-                else if (distance <= 4)
+                else if (distance <= 1.5)
                 {
                     GoForPlayer();
                 }
             }
 
-            if (distance <= agent.stoppingDistance)
+            if (distance <= 1.5f)
             {
                 if (!isAttacking)
                 {

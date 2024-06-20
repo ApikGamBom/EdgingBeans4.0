@@ -4,22 +4,26 @@ public class Gun : MonoBehaviour
 {
     public float Damage = 10f;
     public float Range = 100f;
-    public int publicPointsPerKill = 5;
-    public static int PointsPerKill;
+    public int pOilPerKill = 5;
+    public static int oilPerKill;
     public static GameObject hittedObject;
 
-    public LayerMask goThroug;
+    public LayerMask damagableObject;
 
     public Camera Camera;
     public GameObject bulletSpawnPivot;
     public Transform rigthHandPivot;
     public GameObject gunObject;
 
+    [Header("Sounds")]
+    public AudioSource auidoSource;
+    public AudioClip shoot1,shoot2,shoot3;
+
     [System.Obsolete]
     void Update()
     {
-        PointsPerKill = publicPointsPerKill;
-        
+        oilPerKill = pOilPerKill;
+
         if (!PauseMenu.isPaused && rigthHandPivot.FindChild(gunObject.transform.name))
         {
             if (Input.GetButtonDown("Fire1"))
@@ -31,7 +35,9 @@ public class Gun : MonoBehaviour
 
     void Shoot()
     {
-        if (Physics.Raycast(bulletSpawnPivot.transform.position, Camera.transform.forward, out RaycastHit hit, Range, goThroug))
+        PlaySound();
+
+        if (Physics.Raycast(bulletSpawnPivot.transform.position, Camera.transform.forward, out RaycastHit hit, Range, damagableObject))
         {
             hittedObject = hit.transform.gameObject;
             Debug.Log("Hitted " + hittedObject);
@@ -47,5 +53,22 @@ public class Gun : MonoBehaviour
             }
         }
 
+    }
+
+    void PlaySound()
+    {
+        if (weaponSwitching.weapon == 0)
+        {
+            auidoSource.clip = shoot1;
+            auidoSource.Play();
+        } else if (weaponSwitching.weapon == 1)
+        {
+            auidoSource.clip = shoot2;
+            auidoSource.Play();
+        } else if (weaponSwitching.weapon == 2)
+        {
+            auidoSource.clip = shoot3;
+            auidoSource.Play();
+        }
     }
 }

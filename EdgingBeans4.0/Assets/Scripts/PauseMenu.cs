@@ -1,6 +1,4 @@
-using JetBrains.Annotations;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
@@ -59,7 +57,7 @@ public class PauseMenu : MonoBehaviour
     {
         float remainingTime = UiCountdown;
 
-        if (isPaused && !optionOpen && !PlayerStats.isDeadStatic)
+        if (isPaused && !optionOpen && !PlayerStats.isAliveStatic)
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
@@ -78,7 +76,7 @@ public class PauseMenu : MonoBehaviour
             Crosshair.SetActive(true);
             countdownText.text = "";
         }
-        else if (!isPaused && !optionOpen && !PlayerStats.isDeadStatic)
+        else if (!isPaused && !optionOpen && !PlayerStats.isAliveStatic)
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
