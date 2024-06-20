@@ -25,7 +25,7 @@ public class enemyController_v3 : MonoBehaviour
     public GameObject rayPivot;
     public bool seesPlayer;
 
-    public float damage = 5f;
+    public int damage = 1;
     public float attackInterval = 1f;
     private bool isAttacking = false;
 

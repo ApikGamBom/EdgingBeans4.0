@@ -90,7 +90,7 @@ public class EquipScript : MonoBehaviour
             {
                 GiveOil();
                 Filloil.SetActive(true);
-                Debug.Log("Skibidi");
+                Debug.Log("Dropping off oil");
             }
             else
             {
@@ -136,7 +136,7 @@ public class EquipScript : MonoBehaviour
         {
             if (PlayerStats.oilCount > 0)
             {
-                PlayerStats.tankCount += PlayerStats.oilCount;
+                PlayerStats.currentTankCount += PlayerStats.oilCount;
                 PlayerStats.oilCount = 0;
             }
         }

@@ -1,11 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UIElements;
-using System.Threading;
-using Unity.VisualScripting;
 
 public class SpacePlayerMov : MonoBehaviour
 {
@@ -28,13 +21,14 @@ public class SpacePlayerMov : MonoBehaviour
     public float s_time = 0;
     public float d_time = 0;
 
-    [Header("Crouching")]
-    public Transform defaultState;
-    public Transform ctrlState;
-    public Camera ctrlCam;
-    public Transform Player;
-    public float playerHeigth;
-    public float halfPlayerHeigth;
+    //==Removed Crouching==
+    //[Header("Crouching")]
+    //public Transform defaultState;
+    //public Transform ctrlState;
+    //public Camera ctrlCam;
+    //public Transform Player;
+    //public float playerHeigth;
+    //public float halfPlayerHeigth;
 
     [Header("Gravity")]
     public float gravity = -3f * 2f;
@@ -46,8 +40,11 @@ public class SpacePlayerMov : MonoBehaviour
     public Transform groundCheck;
     public Transform roofCheck;
     public float groundDistance = 0.2f;
-    public float roofDistance = 0.2f;
-    public bool hasRoof;
+
+    //==This is for Crouching==
+    //public float roofDistance = 0.2f;
+    //public bool hasRoof;
+
     public bool canStand;
     public LayerMask groundMask;
     public LayerMask obstacleMask;
@@ -61,8 +58,10 @@ public class SpacePlayerMov : MonoBehaviour
 
     void Start()
     {
-        scale = Player.localScale;
-        halfPlayerHeigth = playerHeigth / 2;
+
+        //==This is for Crouching==
+        //scale = Player.localScale;
+        //halfPlayerHeigth = playerHeigth / 2;
     }
 
     void Update()
@@ -190,28 +189,28 @@ public class SpacePlayerMov : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
 
-        #region Crouching
+        //#region Crouching
 
-        hasRoof = Physics.CheckSphere(roofCheck.position, roofDistance, obstacleMask);
-        if (hasRoof)
-            canStand = false;
-        else
-            canStand = true;
+        //hasRoof = Physics.CheckSphere(roofCheck.position, roofDistance, obstacleMask);
+        //if (hasRoof)
+        //    canStand = false;
+        //else
+        //    canStand = true;
 
-        if (Input.GetKey(KeyCode.C))
-        {
+        //if (Input.GetKey(KeyCode.C))
+        //{
 
-            ctrlCam.transform.position = ctrlState.position;
-            hasSlowness = true;
-            Player.localScale = new Vector3(Player.localScale.x, halfPlayerHeigth, Player.localScale.z);
-        }
-        else if (canStand)
-        {
-            ctrlCam.transform.position = defaultState.position;
-            hasSlowness = false;
-            Player.localScale = new Vector3(Player.localScale.x, playerHeigth, Player.localScale.z);
-        }
+        //    ctrlCam.transform.position = ctrlState.position;
+        //    hasSlowness = true;
+        //    Player.localScale = new Vector3(Player.localScale.x, halfPlayerHeigth, Player.localScale.z);
+        //}
+        //else if (canStand)
+        //{
+        //    ctrlCam.transform.position = defaultState.position;
+        //    hasSlowness = false;
+        //    Player.localScale = new Vector3(Player.localScale.x, playerHeigth, Player.localScale.z);
+        //}
 
-        #endregion
+        //#endregion
     }
 }
