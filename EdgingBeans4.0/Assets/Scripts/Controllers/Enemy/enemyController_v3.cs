@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class enemyController_v3 : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class enemyController_v3 : MonoBehaviour
     Transform player;
     public GameObject playerObject;
     NavMeshAgent agent;
+    public GameObject enemy;
     public GameObject wallCheck;
     public float minDistanceToLastPlayer = 1.6f;
     public float maxDistance = 4f;
@@ -24,6 +26,9 @@ public class enemyController_v3 : MonoBehaviour
     private bool isAttacking = false;
     public bool gotShot;
 
+
+    public Slider enemyHealth;
+
     //=====Sounds for enemy death is in "Target.cs"=====\\
 
     void Start()
@@ -34,6 +39,8 @@ public class enemyController_v3 : MonoBehaviour
 
     void Update()
     {
+        enemyHealth.value = enemy.GetComponent<Target>().health;        
+
         if (!PauseMenu.isPaused)
         {
             if (seesPlayer == false)
