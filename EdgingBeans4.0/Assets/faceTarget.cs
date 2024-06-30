@@ -9,8 +9,10 @@ public class faceTarget : MonoBehaviour
 
     void Update()
     {
-        Vector3 direction = (target.transform.position - rotator.transform.position).normalized;
-        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
-        rotator.transform.rotation = Quaternion.Slerp(rotator.transform.rotation, lookRotation, Time.deltaTime * 5f);
+        //Vector3 direction = (target.transform.position - rotator.transform.position).normalized;
+        //Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+        //rotator.transform.rotation = Quaternion.Slerp(rotator.transform.rotation, lookRotation, Time.deltaTime * 5f);
+
+        rotator.transform.LookAt(target.transform);
     }
 }

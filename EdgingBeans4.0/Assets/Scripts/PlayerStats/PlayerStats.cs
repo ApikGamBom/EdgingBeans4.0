@@ -19,8 +19,9 @@ public class PlayerStats : MonoBehaviour
     public TMP_Text maxHealthCountText;
     public static int health = 20;
 
-    public static int maxHealth;
     public int pHealth;
+
+    public static int maxHealth;
     public bool isAlive;
     public static bool isAliveStatic;
 
@@ -32,8 +33,7 @@ public class PlayerStats : MonoBehaviour
     {
         oilCount = pOilCount;
         
-        if (health <= 0)
-            health = pHealth;
+        health = pHealth;
 
         maxHealth = health;
 

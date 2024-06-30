@@ -97,7 +97,7 @@ public class enemyController_v3 : MonoBehaviour
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(agent.transform.position, maxDistance);
+        Gizmos.DrawWireSphere(enemy.transform.position, maxDistance);
     }
 
     void FacePlayer()

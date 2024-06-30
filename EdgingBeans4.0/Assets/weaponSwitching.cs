@@ -11,9 +11,15 @@ public class weaponSwitching : MonoBehaviour
     public GameObject weapon2;
     public GameObject weapon3;
 
-    public GameObject weaponSelected1;
-    public GameObject weaponSelected2;
-    public GameObject weaponSelected3;
+    public Transform selectedWeapon;
+
+    public Transform selectedWeaponPivot1;
+    public Transform selectedWeaponPivot2;
+    public Transform selectedWeaponPivot3;
+
+    [Header("Sounds")]
+    public AudioSource auidoSource;
+    public AudioClip switchWeapon;
 
 
     void Update()
@@ -44,6 +50,12 @@ public class weaponSwitching : MonoBehaviour
                 weapon = 2;
 
             UpdateWeapon();
+
+            if (currentWeapon != weapon)
+            {
+                auidoSource.clip = switchWeapon;
+                auidoSource.Play();
+            }
         }
     }
 
@@ -55,9 +67,8 @@ public class weaponSwitching : MonoBehaviour
             weapon2.SetActive(false);
             weapon3.SetActive(false);
 
-            weaponSelected1.SetActive(true);
-            weaponSelected2.SetActive(false);
-            weaponSelected3.SetActive(false);
+            selectedWeapon.position = selectedWeaponPivot1.position;
+
         }
         else if (weapon == 1)
         {
@@ -65,9 +76,7 @@ public class weaponSwitching : MonoBehaviour
             weapon2.SetActive(true);
             weapon3.SetActive(false);
 
-            weaponSelected1.SetActive(false);
-            weaponSelected2.SetActive(true);
-            weaponSelected3.SetActive(false);
+            selectedWeapon.position = selectedWeaponPivot2.position;
         }
         else if (weapon == 2)
         {
@@ -75,9 +84,7 @@ public class weaponSwitching : MonoBehaviour
             weapon2.SetActive(false);
             weapon3.SetActive(true);
 
-            weaponSelected1.SetActive(false);
-            weaponSelected2.SetActive(false);
-            weaponSelected3.SetActive(true);
+            selectedWeapon.position = selectedWeaponPivot3.position;
         }
     }
 }
