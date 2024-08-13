@@ -16,7 +16,7 @@ public class EquipScript : MonoBehaviour
 
     [Header("Floats and Bools")]
     public float range = 2f;
-    //public float open = 100f; //Ikke n�dvendig
+    //public float open = 100f; //Ikke nodvendig
     public bool isHoldingItem;
     public static int timesPickedUpInteractable = 0;
 
