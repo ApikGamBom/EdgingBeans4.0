@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.InputSystem;
 
 public class SpaceCameraMov : MonoBehaviour
 {
@@ -16,9 +16,18 @@ public class SpaceCameraMov : MonoBehaviour
     float xRotation = 0f;
     public SliderControl sliderController;
 
+    [Header("MouseAxis")]
+    float MouseX;
+    float MouseY;
+
   void Start()
     {
         UnityEngine.Cursor.lockState = CursorLockMode.Locked;
+
+        for (int i = 0; i < Gamepad.all.Count; i++)
+        {
+            Debug.Log(Gamepad.all[i].name);
+        }
     }
 
   void Update()
@@ -38,10 +47,21 @@ public class SpaceCameraMov : MonoBehaviour
             alwCamMovement = true;
         }
 
-        if(alwCamMovement)
+        if (alwCamMovement)
         {
-            float MouseX = Input.GetAxis("Mouse X") * mouseSensetivity * Time.deltaTime * sliderController.MouseSensValue;
-            float MouseY = Input.GetAxis("Mouse Y") * mouseSensetivity * Time.deltaTime * sliderController.MouseSensValue;
+            if (!PlayerStats.ps4_active)
+            {
+                MouseX = Input.GetAxis("Mouse X") * mouseSensetivity * Time.deltaTime * sliderController.MouseSensValue;
+                MouseY = Input.GetAxis("Mouse Y") * mouseSensetivity * Time.deltaTime * sliderController.MouseSensValue;
+            } else
+            {
+                MouseX = Gamepad.all[0].rightStick.value.x * mouseSensetivity * Time.deltaTime * sliderController.MouseSensValue;
+                MouseY = Gamepad.all[0].rightStick.value.y * mouseSensetivity * Time.deltaTime * sliderController.MouseSensValue;
+
+                Debug.Log("Joystick X" + MouseX);
+                Debug.Log("Joystick Y" + MouseY);
+            }
+                
 
             xRotation -= MouseY;
             xRotation = Mathf.Clamp(xRotation, -90f, 90f);

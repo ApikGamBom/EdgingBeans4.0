@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using JetBrains.Annotations;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -8,10 +9,11 @@ public class PlayerStats : MonoBehaviour
     public TMP_Text currentTankCountText;
     public TMP_Text tankCountGoalText;
     public TMP_Text currentOilCount;
-    public static int oilCount;
+    
     public static int tankCountGoal = 50;
     public static int currentTankCount = 0;
-
+    
+    public static int oilCount;
     public int pOilCount;
 
     //Health
@@ -29,6 +31,9 @@ public class PlayerStats : MonoBehaviour
     public GameObject crossHair;
     public GameObject Stats;
 
+    public bool ps4Controller_Active;
+    public static bool ps4_active;
+
     void Start()
     {
         oilCount = pOilCount;
@@ -42,6 +47,8 @@ public class PlayerStats : MonoBehaviour
 
     void Update()
     {
+        ps4_active = ps4Controller_Active;
+
         isAliveStatic = isAlive;
 
         pOilCount = oilCount;
