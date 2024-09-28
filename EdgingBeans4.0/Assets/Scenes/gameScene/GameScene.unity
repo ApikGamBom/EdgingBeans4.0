@@ -7547,8 +7547,6 @@ MonoBehaviour:
   controller: {fileID: 666660696}
   speed: 2.4
   sprint: 1.4
-  slowness: 0.6
-  hasSlowness: 0
   Camera: {fileID: 2046969174}
   w_time: 0
   a_time: 0
@@ -7557,7 +7555,6 @@ MonoBehaviour:
   gravity: -12
   jumpHeight: 0.8
   continousJump: 1
-  inAirResistance: 0.6
   groundCheck: {fileID: 1423963364}
   roofCheck: {fileID: 0}
   groundDistance: 0.15

@@ -209,7 +209,7 @@
             {
                 "type": "System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
                 "key": "ShapeBuilder.ActiveShapeIndex",
-                "value": "{\"m_Value\":1}"
+                "value": "{\"m_Value\":6}"
             },
             {
                 "type": "System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
@@ -229,12 +229,12 @@
             {
                 "type": "UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
                 "key": "ShapeBuilder.LastPivotPosition",
-                "value": "{\"m_Value\":{\"x\":19.0,\"y\":2.568370819091797,\"z\":17.85310935974121}}"
+                "value": "{\"m_Value\":{\"x\":0.0,\"y\":0.0,\"z\":0.0}}"
             },
             {
                 "type": "UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
                 "key": "ShapeBuilder.LastSize",
-                "value": "{\"m_Value\":{\"x\":1.75,\"y\":0.0,\"z\":-1.25}}"
+                "value": "{\"m_Value\":{\"x\":3.7046852111816408,\"y\":4.615110874176025,\"z\":4.4980363845825199}}"
             },
             {
                 "type": "UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",

@@ -10,8 +10,6 @@ public class SpacePlayerMov : MonoBehaviour
     public CharacterController controller;
     public float speed = 4f;
     public float sprint = 1.5f;
-    public float slowness = 0.6f;
-    public bool hasSlowness;
     //public float jumpTime = 1;
 
     [Header("Dashing")]
@@ -34,7 +32,6 @@ public class SpacePlayerMov : MonoBehaviour
     public float gravity = -3f * 2f;
     public float jumpHeight = 1.5f;
     public bool continousJump = true;
-    public float inAirResistance = 0.6f;
 
     [Header("GroundChecks")]
     public Transform groundCheck;
@@ -53,7 +50,6 @@ public class SpacePlayerMov : MonoBehaviour
     public bool isGrounded;
 
     #endregion
-    Vector3 scale;
     Vector3 velocity;
 
     void Start()
@@ -80,91 +76,29 @@ public class SpacePlayerMov : MonoBehaviour
 
         #region Full Movement
 
-        if (Input.GetKey(KeyCode.LeftShift) && !hasSlowness) //detects for shift key pressed
+        if (Input.GetKey(KeyCode.LeftShift)) //detects for shift key pressed
         {
             if (isGrounded)
             {
                 controller.Move(move * speed * Time.deltaTime * sprint); // <* jumpTime> if shift pressed this happens (player moves 1.4 as fast)
                 //Debug.Log("Sprinting!");
-            } else
-            {
-                controller.Move(move * speed * inAirResistance * Time.deltaTime * sprint); // <* jumpTime> if shift pressed this happens (player moves 1.4 as fast)
-                //Debug.Log("Sprinting in air!");
             }
-        } else if (!hasSlowness){
+        } else {
             if (isGrounded)
             {
                 controller.Move(move * speed * Time.deltaTime); // <* jumpTime> if shift not is pressed this happens (plyer moves at default speed wich is in the <speed> variable)
                 //Debug.Log("Walking normal!")
-            } else
-            {
-                controller.Move(move * speed * inAirResistance * Time.deltaTime); // <* jumpTime> if shift not is pressed this happens (plyer moves at default speed wich is in the <speed> variable)
-                //Debug.Log("Walking in air!")
-            }
-        } else if (hasSlowness)
-        {
-            if (isGrounded)
-            {
-                controller.Move(move * speed * slowness * Time.deltaTime); // <* jumpTime> if shift not is pressed this happens (plyer moves at default speed wich is in the <speed> variable)
-                //Debug.Log("Walking normal!")
-            }
-            else
-            {
-                controller.Move(move * speed * inAirResistance * slowness * Time.deltaTime); // <* jumpTime> if shift not is pressed this happens (plyer moves at default speed wich is in the <speed> variable)
-                //Debug.Log("Walking in air!")
             }
         }
-
-        #endregion
-
-        #region wasd input timer
-
-        if (Input.GetKey(KeyCode.W))
-        {
-            w_time += 1;
-        } else
-        {
-            w_time = 0;
-        }
-        
-        if(Input.GetKey(KeyCode.A))
-        {
-            a_time += 1;
-        } else
-        {
-            a_time = 0;
-        }
-        
-        if (Input.GetKey(KeyCode.S))
-        {
-            s_time += 1;
-        } else
-        {
-            s_time = 0;
-        }
-        
-        if(Input.GetKey(KeyCode.D))
-        {
-            d_time += 1;
-        } else
-        {
-            d_time = 0;
-        }
-        //if (Input.GetKey(KeyCode.Space))
-        //{
-            //jumpTime += .001f;
-            //Debug.Log("Jump "+jumpTime);
-            //Thread.Sleep(10); //Setter koden på pause i ".Sleep(x)" milisekunder OBS: må ha øverst i scriptet "using System.Threading;" NB: Stopper også frames, så det blir færre frames i sekundet
-        //}else{
-            //jumpTime = 1;
-        //}
 
         #endregion
 
         //Dashing
-        if(Input.GetKey(KeyCode.V))
+        if(Input.GetKeyDown(KeyCode.V))
         {
-            controller.Move(move * 1.3f);
+            controller.Move(move * 20 * Time.deltaTime);
+            //velocity.x = 20f;
+            //controller.Move(move * 1.3f);
             //Debug.Log("Dashed!");
             //Thread.Sleep(100);
         }

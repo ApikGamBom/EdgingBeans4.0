@@ -26,7 +26,7 @@ public class Gun : MonoBehaviour
 
         if (!PauseMenu.isPaused && rigthHandPivot.FindChild(gunObject.transform.name))
         {
-            if (Input.GetButtonDown("Fire1"))
+            if (Input.GetButton("Fire1"))
             {
                 Shoot();
             }
